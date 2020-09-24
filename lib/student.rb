@@ -60,7 +60,18 @@ def self.new_from_db(row)
 end 
 
 
-def self.find_by_name
+def self.find_by_name(name)
+  sql = <<-SQL
+  SELECT * 
+  FROM students 
+  WHERE name = ? 
+  LIMIT 1
+  SQL
+  
+  DB[:conn].execute(sql, self.name).map do |row|
+    self.new_from_db(row)
+  end.first 
+end 
 
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
