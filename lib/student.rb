@@ -27,6 +27,8 @@ def self.drop_table
   DB[:conn].execute(sql)
 end 
 
+def update
+
 def save 
   if self.id 
     self.update 
